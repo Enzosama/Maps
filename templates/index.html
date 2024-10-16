@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lập kế hoạch tuyến đường</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lập kế hoạch tuyến đường</h1>
+    <form id="route-form" method="POST">
+        <label for="city">Thành phố:</label>
+        <input type="text" id="city" name="city" required>
+        
+        <label for="start_point">Điểm xuất phát:</label>
+        <input type="text" id="start_point" name="start_point" required>
+        
+        <div id="destinations">
+            <label for="dest1">Điểm đến 1:</label>
+            <input type="text" id="dest1" name="destinations" required>
+        </div>
+        
+        <button type="button" id="add-destination">Thêm điểm đến</button>
+        <button type="submit">Tính toán tuyến đường</button>
+    </form>
+    {% if error %}
+    <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    <script>
+        $(document).ready(function() {
+            let destCount = 1;
+            
+            $('#add-destination').click(function() {
+                destCount++;
+                $('#destinations').append(`
+                    <label for="dest${destCount}">Điểm đến ${destCount}:</label>
+                    <input type="text" id="dest${destCount}" name="destinations" required>
+                `);
+            });
+        });
+    </script>
+</body>
+</html>
